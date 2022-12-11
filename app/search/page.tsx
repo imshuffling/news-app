@@ -12,8 +12,6 @@ async function SearchPage({ searchParams }: Props) {
     true
   );
 
-  console.log("searchParams?.term", searchParams?.term);
-
   return (
     <div>
       <h1 className="headerTitle">Search Results for: {searchParams?.term}</h1>
