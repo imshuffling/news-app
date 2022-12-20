@@ -31,12 +31,6 @@ const fetchNews = async (
           title
           url
         }
-        pagination {
-          count
-          limit
-          offset
-          total
-        }
       }
     }
   `;
@@ -70,5 +64,3 @@ const fetchNews = async (
 };
 
 export default fetchNews;
-
-// stepzen import curl "http://api.mediastack.com/v1/news?access_key=88134a98475643552b6c9a9f95d639ac&sources=business,sports"
