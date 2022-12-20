@@ -2,9 +2,9 @@ import { gql } from "graphql-request";
 import sortNewsByImage from "./sortNewsByImage";
 
 const fetchNews = async (
-  category?: Category | string,
-  keywords?: string,
-  isDynamic?: true
+  category?: Category | String,
+  keywords?: String,
+  isDynamic?: boolean
 ) => {
   const query = gql`
     query MyQuery(
@@ -40,7 +40,7 @@ const fetchNews = async (
     {
       method: "POST",
       cache: isDynamic ? "no-cache" : "default",
-      next: isDynamic ? { revalidate: 0 } : { revalidate: 20 },
+      next: isDynamic ? { revalidate: 0 } : { revalidate: 300 },
       headers: {
         "Content-Type": "application/json",
         Authorization: `Apikey ${process.env.STEPZEN_API_KEY}`,
@@ -56,11 +56,20 @@ const fetchNews = async (
     }
   );
 
-  const newsResponse = await res.json();
-  const newsData = newsResponse.data.myQuery;
-  const news = sortNewsByImage(newsData);
+  console.log(
+    "LOADING NEW DATA FROM API for category >>>",
+    category,
+    keywords
+  )
 
-  return news;
+  const newsResponse = await res?.json()
+
+  console.log("BOOMIN:", newsResponse)
+
+  // const news = sortNewsByImage(newsResponse?.data.myQuery)
+
+  const news = newsResponse?.data.myQuery
+  return news
 };
 
 export default fetchNews;

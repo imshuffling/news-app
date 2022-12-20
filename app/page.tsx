@@ -7,6 +7,8 @@ async function Homepage() {
   // const news: NewsResponse =
   //   MOCK_DATA || (await fetchNews(categories.join(',')));
 
+  console.log('categories', categories.join(','));
+
   const news: NewsResponse = await fetchNews(categories.join(','));
 
   return (
